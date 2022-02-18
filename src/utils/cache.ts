@@ -1,8 +1,10 @@
+import readFilesNames from './read-files-names';
+
 class Cache {
   cache: string[];
 
   constructor() {
-    this.cache = [];
+    this.cache = readFilesNames();
   }
 
   set(name: string): void {
