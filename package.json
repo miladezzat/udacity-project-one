@@ -1,0 +1,36 @@
+{
+  "name": "image-processing-api",
+  "version": "1.0.0",
+  "description": "This is a project one for Udactiy Nanodegree",
+  "main": "index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "start:dev": "nodemon src/index.js",
+    "build": "npx tsc --build",
+    "start": "node dist/index.js",
+    "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "lint": "eslint --ext .js,.ts ."
+  },
+  "keywords": [
+    "nodejs",
+    "image processing",
+    "api",
+    "express"
+  ],
+  "author": "Milad E. Fahmy<miladezzat.f@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.15",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "git-cz": "^4.8.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
+}
