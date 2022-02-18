@@ -1,50 +1,55 @@
 import path from 'path';
 import sharp from 'sharp';
-import { promises as fsPromises} from 'fs';
+import { promises as fsPromises } from 'fs';
+import { Errors } from 'error-handler-e2/build';
 import { FULL_FOLDER_PATH, THUMB_FOLDER_PATH } from '../constants/images';
 import cache from '../utils/cache';
-import getFileExtension from '../utils/get-file-extension';
+import getFileWithExtension from '../utils/get-file-with-extension';
 import { IProcessingImage } from './images.interface';
 
-
 const processingImage = async (args: IProcessingImage) => {
-    const { filename, width, height } = args;
+  const { filename, width, height } = args;
 
-    const name = getFileExtension(filename) as string
+  const fname = getFileWithExtension(filename);
 
-    const imagePath: string = path.resolve(
-        __dirname,
-        `../${FULL_FOLDER_PATH}/${name}`
-    );
-    
-    const thumbPath: string = path.resolve(
-        __dirname,
-        `../${THUMB_FOLDER_PATH}/${name}`
-    );
+  if (!fname) {
+    throw new Errors.BadRequestError('File name not support');
+  }
 
-    const isExist = cache.isExist(name);    
+  const name = fname as string;
 
-    if (isExist) {
-        return fsPromises.readFile(thumbPath);
-    }
+  const imagePath: string = path.resolve(
+    __dirname,
+    `../${FULL_FOLDER_PATH}/${name}`
+  );
 
-    const resizeOptions: {
-        width?: number;
-        height?: number;
-    } = {};
+  const thumbPath: string = path.resolve(
+    __dirname,
+    `../${THUMB_FOLDER_PATH}/${name}`
+  );
 
-    if (width) {
-        resizeOptions.width = +width;
-    }
+  const isExist = cache.isExist(name);
 
-    if (height) {
-        resizeOptions.height = +height;
-    }
-
-    await sharp(imagePath).resize(resizeOptions).toFile(thumbPath);
-
+  if (isExist) {
     return fsPromises.readFile(thumbPath);
+  }
 
+  const resizeOptions: {
+    width?: number;
+    height?: number;
+  } = {};
+
+  if (width) {
+    resizeOptions.width = +width;
+  }
+
+  if (height) {
+    resizeOptions.height = +height;
+  }
+
+  await sharp(imagePath).resize(resizeOptions).toFile(thumbPath);
+
+  return fsPromises.readFile(thumbPath);
 };
 
 export default processingImage;
