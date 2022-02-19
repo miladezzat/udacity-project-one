@@ -1,9 +1,9 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import request from 'supertest';
 import { StatusCodes } from 'error-handler-e2';
 import fs from 'fs';
 import app from '../../app';
 import readFilesNames from '../../utils/read-files-names';
-
 
 describe('Images Routes /', () => {
   it('Should return 400, bad request filename not send', async () => {
