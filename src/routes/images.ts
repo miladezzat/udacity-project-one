@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   } catch (error: unknown) {
     const ourError = error as { message: string };
     return res
-      .status(400)
+      .status(StatusCodes.BAD_REQUEST)
       .send(
         `The following error occurred processing your image remedy and try again: ${ourError?.message}`
       );
