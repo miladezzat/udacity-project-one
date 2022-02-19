@@ -7,7 +7,7 @@ import cache from '../utils/cache';
 import getFileWithExtension from '../utils/get-file-with-extension';
 import { IProcessingImage } from './images.interface';
 
-const processingImage = async (args: IProcessingImage) => {
+const processingImage = async (args: IProcessingImage): Promise<unknown> => {
   const { filename, width, height } = args;
 
   const fname = getFileWithExtension(filename);

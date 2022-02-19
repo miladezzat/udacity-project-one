@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { promises as fsPromises } from 'fs';
 
-const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const loggerMiddleware = (req: Request, res: Response, next: NextFunction): void => {
   const date = new Date();
 
   const seconds: number = date.getSeconds();

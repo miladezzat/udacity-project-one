@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { StatusCodes } from 'error-handler-e2';
 import imageProcessingService from '../services/images';
 import { IProcessingImage } from '../services/images.interface';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response): Promise<unknown> => {
   try {
     const args = req.query as unknown as IProcessingImage;
 
